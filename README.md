@@ -1,0 +1,4 @@
+Numerical
+=========
+
+bisection method
