@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+#define E 0.05;
+float putValue_function(float m);
+int a4,a3,a2,a1,a0,i=0;
+
+float putValue_function(float m)
+{
+    float val;
+    val=a4*m*m*m*m + a3*m*m*m + a2*m*m + a1*m + a0;  
+    return(val);               
+}
+void display_equation(int a4,int a3,int a2,int a1,int a0)
+{
+     printf("The equation format is: ");
+     printf("%dx^4 + %dx^3 + %dx^2 + %dx^1 + %d",a4,a3,a2,a1,a0);
+}
+
+int main(void)
+{
+    float xL,xU;
+    float xM,error;
+    float fxL,fxU,fxM,root;
+    printf("Enter the coefficient of the equations:");
+    scanf("%d%d%d%d%d",&a4,&a3,&a2,&a1,&a0);
+    display_equation(a4,a3,a2,a1,a0);
+    printf("\nEnter the interval xL and xU");
+    scanf("%f%f",&xL,&xU);
+    do
+    {
+       printf("Iteration %d\n",i++);
+       fxL=putValue_function(xL);
+       printf("\nfxL=%f",fxL);
+       fxU=putValue_function(xU); 
+       printf("\nfxU=%f",fxU);
+    
+       xM =(xL+xU)/2;
+       /*if(putValue_function(xM)==0.0)
+       {
+           root=xM; 
+           printf("the root is %f",root); 
+           break;                
+       } */
+       error=(xU-xL)/xU;
+       if (error<0.05)
+       {
+           root=xM;
+           printf("the root is %f",root);  
+           break;                     
+       }
+       else
+       {              
+                       if((fxL*fxM)<0)
+                       {
+                                      xU=xM;
+                       }
+                       else
+                       {
+                                      xL=xM;
+                       }
+       }
+    }while(1);   
+    getch();
+    return 0;
+}
